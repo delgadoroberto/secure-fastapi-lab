@@ -1,0 +1,44 @@
+name: FastAPI Security Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  security:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install security tools
+        run: |
+          pip install bandit pip-audit
+
+      - name: Run Bandit
+        run: bandit -r . -ll
+
+      - name: Run pip-audit
+        run: pip-audit -r requirements.txt
+
+      - name: Run Trivy filesystem scan
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: 'fs'
+          scan-ref: '.'
+          severity: 'HIGH,CRITICAL'
+
+      - name: Run Gitleaks
+        uses: gitleaks/gitleaks-action@v2
+
+      - name: Run Hadolint
+        uses: hadolint/hadolint-action@v3.1.0
+        with:
+          dockerfile: Dockerfile
