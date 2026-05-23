@@ -12,10 +12,5 @@ def home():
     return {"message": "Vulnerable FastAPI App"}
 
 @app.get("/deserialize")
-def deserialize(data: str):
-
-    decoded = base64.b64decode(data)
-
-    obj = pickle.loads(decoded)
-
-    return {"object": str(obj)}
+def deserialize():
+    return {"message": "Deserialization disabled"}
