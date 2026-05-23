@@ -3,7 +3,7 @@ import pickle
 import base64
 import os
 
-app = FastAPI(debug=True)
+app = FastAPI(debug=False)
 
 API_TOKEN = os.getenv("API_TOKEN")
 
