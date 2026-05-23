@@ -1,10 +1,11 @@
 from fastapi import FastAPI
 import pickle
 import base64
+import os
 
 app = FastAPI(debug=True)
 
-API_TOKEN = "SUPER-TOP-SECRET-TOKEN"
+API_TOKEN = os.getenv("API_TOKEN")
 
 @app.get("/")
 def home():
