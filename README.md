@@ -352,12 +352,4 @@ Please open an issue before submitting major changes.
 
 # License
 
-This project is released under the MIT License.
-
----
-
-# Author
-
-**Roberto Delgado**
-
-Cybersecurity Engineer
+This project is licensed under the MIT License. See the `LICENSE` file for details.
